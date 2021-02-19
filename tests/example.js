@@ -52,12 +52,33 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("interacting with buttons", async () => {
+  it("interacting with buttons", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
-    // await page.type("#developer-name", "Abdallah");
     await page.click("#tried-test-cafe");
+    await browser.close();
+  });
+
+  it("interacting with dropdown", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    await page.select("#preferred-interface", "JavaScript API");
+    await browser.close();
+  });
+
+  it.only("filling the form and submit", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    await page.type("#developer-name", "Abdallah");
+    await page.select("#preferred-interface", "JavaScript API");
+    await page.click("#tried-test-cafe");
+    await page.type("#comments", "This is my comment");
+    await page.click("#submit-button");
+    await page.waitForSelector("#article-header");
+    // await page.waitForTimeout(5000);
     await browser.close();
   });
 });
