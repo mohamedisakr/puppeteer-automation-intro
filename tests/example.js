@@ -68,7 +68,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("filling the form and submit", async () => {
+  it("filling the form and submit", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
@@ -79,6 +79,17 @@ describe("my first test", () => {
     await page.click("#submit-button");
     await page.waitForSelector("#article-header");
     // await page.waitForTimeout(5000);
+    await browser.close();
+  });
+
+  it.only("should get page title and url", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    const title = await page.title();
+    console.log(title);
+    const url = await page.url();
+    console.log(url);
     await browser.close();
   });
 });
