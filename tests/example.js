@@ -93,7 +93,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should get element text", async () => {
+  it("should get element text", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
@@ -102,6 +102,18 @@ describe("my first test", () => {
       (element) => element.textContent
     );
     console.log(rateText);
+    await browser.close();
+  });
+
+  it.only("should get elements count", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    const legendCount = await page.$$eval(
+      "legend",
+      (element) => element.length
+    );
+    console.log(`# of legend is ${legendCount}`);
     await browser.close();
   });
 });
