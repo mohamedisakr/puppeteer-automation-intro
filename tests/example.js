@@ -18,7 +18,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should reload the page", async () => {
+  it("should reload the page", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("http://example.com");
@@ -27,6 +27,20 @@ describe("my first test", () => {
     await page.reload();
     await page.waitForTimeout(300);
     await page.waitForSelector("h1");
+    await browser.close();
+  });
+
+  it.only("should go back and forward", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("http://example.com");
+    await page.waitForSelector("h1");
+    await page.goto("https://dev.to/");
+    await page.waitForSelector("#page-content-inner");
+    await page.goBack();
+    await page.waitForSelector("h1");
+    await page.goForward();
+    await page.waitForSelector("#page-content-inner");
     await browser.close();
   });
 });
