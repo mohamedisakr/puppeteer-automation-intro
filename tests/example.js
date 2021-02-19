@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const expect = require("chai").expect;
 
 describe("my first test", () => {
   it("should launch browser", async () => {
@@ -105,7 +106,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should get elements count", async () => {
+  it("should get elements count", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
@@ -114,6 +115,19 @@ describe("my first test", () => {
       (element) => element.length
     );
     console.log(`# of legend is ${legendCount}`);
+    await browser.close();
+  });
+
+  it.only("should get elements count using assertion", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    const legendCount = await page.$$eval(
+      "legend",
+      (element) => element.length
+    );
+    // console.log(`# of legend is ${legendCount}`);
+    expect(legendCount).to.equal(6);
     await browser.close();
   });
 });
