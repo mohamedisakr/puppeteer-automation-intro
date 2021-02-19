@@ -44,11 +44,20 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("interacting with inputs", async () => {
+  it("interacting with inputs", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
     await page.type("#developer-name", "Abdallah");
+    await browser.close();
+  });
+
+  it.only("interacting with buttons", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    // await page.type("#developer-name", "Abdallah");
+    await page.click("#tried-test-cafe");
     await browser.close();
   });
 });
