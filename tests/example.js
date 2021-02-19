@@ -30,7 +30,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should go back and forward", async () => {
+  it("should go back and forward", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("http://example.com");
@@ -41,6 +41,14 @@ describe("my first test", () => {
     await page.waitForSelector("h1");
     await page.goForward();
     await page.waitForSelector("#page-content-inner");
+    await browser.close();
+  });
+
+  it.only("interacting with inputs", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    await page.type("#developer-name", "Abdallah");
     await browser.close();
   });
 });
