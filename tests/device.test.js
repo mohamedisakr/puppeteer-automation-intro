@@ -7,7 +7,8 @@ describe("my first test", () => {
 
   before(async () => {
     browser = await puppeteer.launch();
-    page = await browser.newPage();
+    const incognito = await browser.createIncognitoBrowserContext();
+    page = await incognito.newPage();
   });
 
   after(async () => {
