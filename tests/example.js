@@ -82,7 +82,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should get page title and url", async () => {
+  it("should get page title and url", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
@@ -90,6 +90,18 @@ describe("my first test", () => {
     console.log(title);
     const url = await page.url();
     console.log(url);
+    await browser.close();
+  });
+
+  it.only("should get element text", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    const rateText = await page.$eval(
+      "legend",
+      (element) => element.textContent
+    );
+    console.log(rateText);
     await browser.close();
   });
 });
