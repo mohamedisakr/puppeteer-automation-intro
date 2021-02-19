@@ -130,13 +130,21 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("using keyboard press", async () => {
+  it("using keyboard press", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("http://zero.webappsecurity.com/");
     await page.waitForSelector("#searchTerm");
     await page.type("#searchTerm", "credit");
     await page.keyboard.press("Enter");
+    await browser.close();
+  });
+
+  it.only("using xpath", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("http://zero.webappsecurity.com/");
+    await page.waitForXPath("//a[normalize-space()='More Services']");
     await browser.close();
   });
 });
