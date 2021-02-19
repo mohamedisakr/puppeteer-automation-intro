@@ -118,7 +118,7 @@ describe("my first test", () => {
     await browser.close();
   });
 
-  it.only("should get elements count using assertion", async () => {
+  it("should get elements count using assertion", async () => {
     const browser = await puppeteer.launch(); //{ headless: false }
     const page = await browser.newPage();
     await page.goto("https://devexpress.github.io/testcafe/example/");
@@ -126,8 +126,17 @@ describe("my first test", () => {
       "legend",
       (element) => element.length
     );
-    // console.log(`# of legend is ${legendCount}`);
     expect(legendCount).to.equal(6);
+    await browser.close();
+  });
+
+  it.only("using keyboard press", async () => {
+    const browser = await puppeteer.launch(); //{ headless: false }
+    const page = await browser.newPage();
+    await page.goto("http://zero.webappsecurity.com/");
+    await page.waitForSelector("#searchTerm");
+    await page.type("#searchTerm", "credit");
+    await page.keyboard.press("Enter");
     await browser.close();
   });
 });
